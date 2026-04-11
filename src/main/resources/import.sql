@@ -1,0 +1,3 @@
+INSERT INTO users_tb (name, email, password, phone, birth_date) VALUES ('John Doe', 'john@clinic.com', 'john123', '1234567890', '1990-01-01');
+INSERT INTO users_tb (name, email, password, phone, birth_date) VALUES ('Jane Smith', 'jane@clinic.com', 'jane123', '0987654321', '1992-02-02');
+INSERT INTO users_tb (name, email, password,  phone, birth_date) VALUES ('Alice Johnson', 'alice@clinic.com', 'alice123', '5555555555', '1985-03-03');
