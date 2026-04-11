@@ -4,6 +4,7 @@ import com.manhcia.api_vet_clinic.dtos.request.UserRequest;
 import com.manhcia.api_vet_clinic.dtos.response.UserResponse;
 import com.manhcia.api_vet_clinic.services.UserService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
@@ -29,12 +30,12 @@ public class UserController {
     }
 
     @PostMapping
-    public UserResponse create(@RequestBody UserRequest dto) {
+    public UserResponse create(@Valid @RequestBody UserRequest dto) {
         return userService.create(dto);
     }
 
     @PutMapping("/{id}")
-    public UserResponse update(@PathVariable Long id, @RequestBody UserRequest dto) {
+    public UserResponse update(@PathVariable Long id, @Valid @RequestBody UserRequest dto) {
         return userService.update(id, dto);
     }
 }

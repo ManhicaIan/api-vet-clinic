@@ -4,8 +4,10 @@ import com.manhcia.api_vet_clinic.dtos.request.UserRequest;
 import com.manhcia.api_vet_clinic.dtos.response.UserResponse;
 import com.manhcia.api_vet_clinic.models.User;
 import com.manhcia.api_vet_clinic.repositories.UserRepository;
+import com.manhcia.api_vet_clinic.services.exceptions.EmailRegisteredException;
 import com.manhcia.api_vet_clinic.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -39,9 +41,13 @@ public class UserService {
 
     @Transactional
     public UserResponse create(UserRequest dto) {
-        User user = new User();
-        copyDtoToEntity(dto, user);
-        return new UserResponse(userRepository.save(user));
+        try {
+            User user = new User();
+            copyDtoToEntity(dto, user);
+            return new UserResponse(userRepository.save(user));
+        } catch (DataIntegrityViolationException e) {
+            throw new EmailRegisteredException("Email already registered");
+        }
     }
 
     @Transactional
