@@ -1,0 +1,7 @@
+package com.manhcia.api_vet_clinic.services.exceptions;
+
+public class ResourceNotFoundException extends RuntimeException {
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
+}
